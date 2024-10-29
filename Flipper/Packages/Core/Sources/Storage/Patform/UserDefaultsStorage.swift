@@ -20,6 +20,9 @@ public class UserDefaultsStorage {
     @UserDefault(key: .hasReaderLog, defaultValue: false)
     public var hasReaderLog: Bool
 
+    @UserDefault(key: .showInfraredRemoteTab, defaultValue: true)
+    public var showInfraredRemoteTab: Bool
+
     // MARK: Debug
 
     @UserDefault(key: .isDebugMode, defaultValue: false)
@@ -96,6 +99,7 @@ public extension UserDefaults {
         case hasReaderLog = "hasReaderLog"
         case showAppsUpdate = "showAppsUpdate"
         case hiddenApps = "hiddenApps"
+        case showInfraredRemoteTab = "showInfraredRemoteTab"
 
         case isDebugMode = "isDebugMode"
         case isSyncingDisabled = "isSyncingDisabled"
