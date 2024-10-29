@@ -160,6 +160,9 @@ extension InfraredView {
                     viewState = .display(signal, .default)
                 case .file(let file):
                     isFinalSignal = true
+
+                    // FIXME: Navigaion bug when call in onAppear/task
+                    try? await Task.sleep(seconds: 0.5)
                     path.append(Destination.layout(file))
                 }
             } catch let error as InfraredModel.Error.Network {
