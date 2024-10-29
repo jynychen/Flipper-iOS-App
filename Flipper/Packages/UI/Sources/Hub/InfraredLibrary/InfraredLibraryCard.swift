@@ -17,24 +17,15 @@ struct InfraredLibraryCard: View {
     }
 
     struct Badge: View {
-        @Environment(\.colorScheme) var colorScheme
-
-        private var color: Color {
-            switch colorScheme {
-            case .light: return .black40
-            default: return .black30
-            }
-        }
-
         var body: some View {
             Text("Beta")
                 .font(.system(size: 12))
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)
-                .foregroundColor(color)
+                .foregroundColor(.sGreen)
                 .overlay(
                     RoundedRectangle(cornerRadius: 30)
-                        .stroke(color, lineWidth: 1)
+                        .stroke(Color.sGreen, lineWidth: 1)
                 )
                 .padding(.trailing, 4)
         }
