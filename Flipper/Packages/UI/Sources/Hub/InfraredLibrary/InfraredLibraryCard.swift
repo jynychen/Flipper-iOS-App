@@ -9,7 +9,7 @@ struct InfraredLibraryCard: View {
             image: "InfraredRemoteLibrary",
             subtitle: "Remotes Library",
             description:
-                "Find remotes for your devices from a " +
+                "Find and save remotes for your devices from a " +
                 "wide range of brands and models"
         ) {
             Badge()
