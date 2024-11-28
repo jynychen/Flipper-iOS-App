@@ -54,7 +54,7 @@ func shareImage(name: String, ext: String = "png", data: Data) {
     else {
         return
     }
-    UI.share(url) {
+    share(url) {
         try? FileManager.default.removeItem(at: url)
     }
 }

@@ -61,7 +61,7 @@ struct FullScreenshotsView: View {
         else { return }
 
         let name = "Screenshot from \(title)"
-        UI.shareImage(name: name, data: data)
+        shareImage(name: name, data: data)
     }
 }
 

@@ -265,7 +265,7 @@ struct RemoteControlView: View {
 
     func screenshot() {
         guard let data = screenshotImage?.pngData() else { return }
-        UI.shareImage(name: screenshotName, data: data)
+        shareImage(name: screenshotName, data: data)
     }
 }
 

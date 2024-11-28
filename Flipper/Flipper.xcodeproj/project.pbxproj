@@ -3,14 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		0A228A9D29DE0D2F000D7D10 /* FlipperShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A228A9C29DE0D2F000D7D10 /* FlipperShortcuts.swift */; };
 		0AD5C05D29D9A04E00E0F97E /* ArchivedItemEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD5C05B29D9A04E00E0F97E /* ArchivedItemEntity.swift */; };
 		0AD5C05E29D9A04E00E0F97E /* SendArchivedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD5C05C29D9A04E00E0F97E /* SendArchivedItem.swift */; };
-		49CE8F9E25262E2300B9CBE4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49CE8F9D25262E2300B9CBE4 /* LaunchScreen.storyboard */; };
+		6527CB1C2CF87913000ABD05 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6527CB1B2CF87913000ABD05 /* MarkdownUI */; };
 		65CAD4C22BD6946000628789 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 65CAD4C12BD6946000628789 /* PrivacyInfo.xcprivacy */; };
 		8B064D5D2BD6C8F6008C00B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B064D5C2BD6C8F6008C00B3 /* Assets.xcassets */; };
 		8B1A481929C113A5000169E9 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B1A481829C113A5000169E9 /* WidgetKit.framework */; };
@@ -40,17 +40,11 @@
 		8B5B6C152B13FDAD00B76D83 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5B6C142B13FDAD00B76D83 /* AppDelegate.swift */; };
 		8B5E986429E8235A0057B0D7 /* PlayAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5E986329E8235A0057B0D7 /* PlayAlert.swift */; };
 		8B6CABEB2C7A06F000341B33 /* KeyQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6CABEA2C7A06EF00341B33 /* KeyQuery.swift */; };
-		8B7064CC26E27429006CB4A8 /* UI in Frameworks */ = {isa = PBXBuildFile; productRef = 8B7064CB26E27429006CB4A8 /* UI */; };
 		8B7480DE2807483500692304 /* Born2bSportyV2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8B7480DD2807483500692304 /* Born2bSportyV2.ttf */; };
 		8B77A9CD26CAA43300A3DF9F /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 8B77A9CC26CAA43300A3DF9F /* Core */; };
 		8B8DEB992BD6EF610051E3D0 /* LiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8DEB982BD6EF610051E3D0 /* LiveActivity.swift */; };
 		8B8DEB9B2BD6EF960051E3D0 /* Activity in Frameworks */ = {isa = PBXBuildFile; productRef = 8B8DEB9A2BD6EF960051E3D0 /* Activity */; };
 		8BA14F332B14A5DB0026B9E9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8BA14F322B14A5DB0026B9E9 /* GoogleService-Info.plist */; };
-		8BA57F1D273AD21D00A3A33B /* nfc.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA57F18273AD21D00A3A33B /* nfc.png */; };
-		8BA57F1E273AD21D00A3A33B /* ibutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA57F19273AD21D00A3A33B /* ibutton.png */; };
-		8BA57F1F273AD21D00A3A33B /* rfid.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA57F1A273AD21D00A3A33B /* rfid.png */; };
-		8BA57F20273AD21D00A3A33B /* subhz.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA57F1B273AD21D00A3A33B /* subhz.png */; };
-		8BA57F21273AD21D00A3A33B /* irda.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA57F1C273AD21D00A3A33B /* irda.png */; };
 		8BC7F2E02B2FA3CC002F66A5 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC7F2DF2B2FA3CC002F66A5 /* LaunchScreenView.swift */; };
 		8BCE39EB289D47EA00FB5704 /* HaxrCorpNeue.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BCE39EA289D47EA00FB5704 /* HaxrCorpNeue.ttf */; };
 		8BCFDDDF277A2405002DA4CD /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BCFDDDE277A2405002DA4CD /* QuickLook.framework */; platformFilter = maccatalyst; };
@@ -118,8 +112,6 @@
 		0A228A9C29DE0D2F000D7D10 /* FlipperShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipperShortcuts.swift; sourceTree = "<group>"; };
 		0AD5C05B29D9A04E00E0F97E /* ArchivedItemEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchivedItemEntity.swift; sourceTree = "<group>"; };
 		0AD5C05C29D9A04E00E0F97E /* SendArchivedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendArchivedItem.swift; sourceTree = "<group>"; };
-		44A5B59224F05647009EE7FB /* iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iOS.entitlements; sourceTree = "<group>"; };
-		49CE8F9D25262E2300B9CBE4 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		65B31A442C400D8500F72D36 /* Backend */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Backend; path = Packages/Backend; sourceTree = "<group>"; };
 		65CAD4C12BD6946000628789 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		8B064D5C2BD6C8F6008C00B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -151,18 +143,12 @@
 		8B6CABEA2C7A06EF00341B33 /* KeyQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyQuery.swift; sourceTree = "<group>"; };
 		8B7480DD2807483500692304 /* Born2bSportyV2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Born2bSportyV2.ttf; sourceTree = "<group>"; };
 		8B82A62A2AD49D71007E9E67 /* Macro */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Macro; path = Packages/Macro; sourceTree = "<group>"; };
-		8B89527827581E7B00E4C336 /* UI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = UI; path = Packages/UI; sourceTree = "<group>"; };
 		8B89527A27581E9500E4C336 /* Core */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Core; path = Packages/Core; sourceTree = "<group>"; };
 		8B8DEB972BD6ED210051E3D0 /* Activity */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Activity; path = Packages/Activity; sourceTree = "<group>"; };
 		8B8DEB982BD6EF610051E3D0 /* LiveActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveActivity.swift; sourceTree = "<group>"; };
 		8B906E9B2C74D6990046CAAC /* LiveWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LiveWidgetExtension.entitlements; sourceTree = "<group>"; };
 		8BA14F322B14A5DB0026B9E9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8BA49B4B2902C86C00762ADF /* MFKey32v2 */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = MFKey32v2; path = Packages/MFKey32v2; sourceTree = "<group>"; };
-		8BA57F18273AD21D00A3A33B /* nfc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nfc.png; sourceTree = "<group>"; };
-		8BA57F19273AD21D00A3A33B /* ibutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ibutton.png; sourceTree = "<group>"; };
-		8BA57F1A273AD21D00A3A33B /* rfid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rfid.png; sourceTree = "<group>"; };
-		8BA57F1B273AD21D00A3A33B /* subhz.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = subhz.png; sourceTree = "<group>"; };
-		8BA57F1C273AD21D00A3A33B /* irda.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = irda.png; sourceTree = "<group>"; };
 		8BB226F02B61242A00468E73 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		8BC7F2DF2B2FA3CC002F66A5 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		8BCE39EA289D47EA00FB5704 /* HaxrCorpNeue.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HaxrCorpNeue.ttf; sourceTree = "<group>"; };
@@ -179,8 +165,21 @@
 		F0DBFA1A24EF2F9600EB2880 /* FlipperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipperApp.swift; sourceTree = "<group>"; };
 		F0DBFA1C24EF2F9900EB2880 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F0DBFA2124EF2F9900EB2880 /* Flipper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flipper.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F0DBFA2424EF2F9900EB2880 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		6527C8042CF875A0000ABD05 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = F0DBFA2024EF2F9900EB2880 /* Flipper(iOS) */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		6527C7FC2CF875A0000ABD05 /* iOS */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (6527C8042CF875A0000ABD05 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = iOS; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		8B1A481429C113A5000169E9 /* Frameworks */ = {
@@ -214,9 +213,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B7064CC26E27429006CB4A8 /* UI in Frameworks */,
 				8BF8025C2B0C14670083DF49 /* Notifications in Frameworks */,
 				8B77A9CD26CAA43300A3DF9F /* Core in Frameworks */,
+				6527CB1C2CF87913000ABD05 /* MarkdownUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,22 +297,9 @@
 				8BE40CF627F1266D00288F66 /* Peripheral */,
 				8BA49B4B2902C86C00762ADF /* MFKey32v2 */,
 				8B89527A27581E9500E4C336 /* Core */,
-				8B89527827581E7B00E4C336 /* UI */,
 				65B31A442C400D8500F72D36 /* Backend */,
 			);
 			name = Packages;
-			sourceTree = "<group>";
-		};
-		8BA57ED9273AA05900A3A33B /* FileIcons */ = {
-			isa = PBXGroup;
-			children = (
-				8BA57F19273AD21D00A3A33B /* ibutton.png */,
-				8BA57F1C273AD21D00A3A33B /* irda.png */,
-				8BA57F18273AD21D00A3A33B /* nfc.png */,
-				8BA57F1A273AD21D00A3A33B /* rfid.png */,
-				8BA57F1B273AD21D00A3A33B /* subhz.png */,
-			);
-			path = FileIcons;
 			sourceTree = "<group>";
 		};
 		8BCFDDE0277A2405002DA4CD /* KeyPreview */ = {
@@ -350,7 +336,7 @@
 			isa = PBXGroup;
 			children = (
 				8B77A9C626CAA3BA00A3DF9F /* Packages */,
-				F0DBFA2324EF2F9900EB2880 /* iOS */,
+				6527C7FC2CF875A0000ABD05 /* iOS */,
 				F0DBFA1924EF2F9600EB2880 /* Shared */,
 				8BED6139270B617B009E51E2 /* SwiftLint */,
 				8BCFDDE0277A2405002DA4CD /* KeyPreview */,
@@ -385,17 +371,6 @@
 				8B2F29832C1CD73400FEB48E /* LiveWidgetExtension.appex */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		F0DBFA2324EF2F9900EB2880 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				8BA57ED9273AA05900A3A33B /* FileIcons */,
-				F0DBFA2424EF2F9900EB2880 /* Info.plist */,
-				44A5B59224F05647009EE7FB /* iOS.entitlements */,
-				49CE8F9D25262E2300B9CBE4 /* LaunchScreen.storyboard */,
-			);
-			path = iOS;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -476,11 +451,14 @@
 				8B1A482A29C113A6000169E9 /* PBXTargetDependency */,
 				8B2F29912C1CD73500FEB48E /* PBXTargetDependency */,
 			);
+			fileSystemSynchronizedGroups = (
+				6527C7FC2CF875A0000ABD05 /* iOS */,
+			);
 			name = "Flipper(iOS)";
 			packageProductDependencies = (
 				8B77A9CC26CAA43300A3DF9F /* Core */,
-				8B7064CB26E27429006CB4A8 /* UI */,
 				8BF8025B2B0C14670083DF49 /* Notifications */,
+				6527CB1B2CF87913000ABD05 /* MarkdownUI */,
 			);
 			productName = "Flipper (iOS)";
 			productReference = F0DBFA2124EF2F9900EB2880 /* Flipper.app */;
@@ -520,6 +498,7 @@
 			);
 			mainGroup = F0DBFA1424EF2F9600EB2880;
 			packageReferences = (
+				6527CB1A2CF87913000ABD05 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 			);
 			productRefGroup = F0DBFA2224EF2F9900EB2880 /* Products */;
 			projectDirPath = "";
@@ -566,12 +545,6 @@
 			files = (
 				8B7480DE2807483500692304 /* Born2bSportyV2.ttf in Resources */,
 				8BCE39EB289D47EA00FB5704 /* HaxrCorpNeue.ttf in Resources */,
-				8BA57F1E273AD21D00A3A33B /* ibutton.png in Resources */,
-				8BA57F21273AD21D00A3A33B /* irda.png in Resources */,
-				8BA57F1D273AD21D00A3A33B /* nfc.png in Resources */,
-				8BA57F1F273AD21D00A3A33B /* rfid.png in Resources */,
-				8BA57F20273AD21D00A3A33B /* subhz.png in Resources */,
-				49CE8F9E25262E2300B9CBE4 /* LaunchScreen.storyboard in Resources */,
 				8BA14F332B14A5DB0026B9E9 /* GoogleService-Info.plist in Resources */,
 				65CAD4C22BD6946000628789 /* PrivacyInfo.xcprivacy in Resources */,
 				F0DBFA4724EF2F9900EB2880 /* Assets.xcassets in Resources */,
@@ -1151,10 +1124,22 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		6527CB1A2CF87913000ABD05 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gonzalezreal/swift-markdown-ui";
+			requirement = {
+				kind = exactVersion;
+				version = 2.3.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
-		8B7064CB26E27429006CB4A8 /* UI */ = {
+		6527CB1B2CF87913000ABD05 /* MarkdownUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = UI;
+			package = 6527CB1A2CF87913000ABD05 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
+			productName = MarkdownUI;
 		};
 		8B77A9CC26CAA43300A3DF9F /* Core */ = {
 			isa = XCSwiftPackageProductDependency;

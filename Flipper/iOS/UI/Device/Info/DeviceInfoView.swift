@@ -139,7 +139,7 @@ struct DeviceInfoView: View {
         let content = array.joined(separator: "\n")
         let filename = "dump-\(name)-\(formatter.string(from: Date())).txt"
 
-        UI.shareFile(name: filename, content: content)
+        shareFile(name: filename, content: content)
     }
 }
 
