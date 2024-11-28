@@ -20,18 +20,6 @@ public extension Color {
         .init(UIColor.clear)
     }
 
-    static var keyboardBackground: Color {
-        .init("KeyboardBackground")
-    }
-
-    static var keyboardButton: Color {
-        .init("KeyboardButton")
-    }
-
-    static var keyboardControl: Color {
-        .init("KeyboardControl")
-    }
-
     // MARK: Accent
 
     static var a1: Color {
@@ -82,18 +70,6 @@ public extension Color {
 
     static var black88: Color {
         .init(red: 0.11, green: 0.11, blue: 0.11)
-    }
-
-    // MARK: Theme
-
-    static var black16Black60: Color {
-        .init("Black16Black60")
-    }
-
-    // MARK: SVG Icons
-
-    static var blackBlack20: Color {
-        .init("BlackBlack20")
     }
 
     // MARK: Statuses
@@ -156,15 +132,5 @@ public extension Color {
 
     static var badUSB: Color {
         .init(red: 1.0, green: 0.75, blue: 0.91)
-    }
-
-    static var emulateDisabled: Color {
-        .init("EmulateDisabled")
-    }
-
-    // HEX Editor
-
-    static var hexSelection: Color {
-        .init("HEXSelection")
     }
 }

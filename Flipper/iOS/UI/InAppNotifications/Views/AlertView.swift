@@ -80,9 +80,3 @@ extension View {
         })
     }
 }
-
-extension ShapeStyle where Self == Color {
-    static var alertBackground: Color {
-        .init("AlertBackground")
-    }
-}
