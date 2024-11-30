@@ -31,7 +31,7 @@ enum PB_CommandStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
   ///*< Command can't be decoded successfully - command_id in response may be wrong! 
   case errorDecode // = 2
 
-  ///*< Command succesfully decoded, but not implemented (deprecated or not yet implemented) 
+  ///*< Command successfully decoded, but not implemented (deprecated or not yet implemented) 
   case errorNotImplemented // = 3
 
   ///*< Somebody took global lock, so not all commands are available 
@@ -40,13 +40,13 @@ enum PB_CommandStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
   ///*< Not received has_next == 0 
   case errorContinuousCommandInterrupted // = 14
 
-  ///*< not provided (or provided invalid) crucial parameters to perform rpc 
+  ///*< not provided (or provided invalid) crucial parameters to perform RPC 
   case errorInvalidParameters // = 15
 
   ///*< Storage Errors 
   case errorStorageNotReady // = 5
 
-  ///*< File/Dir alrady exist 
+  ///*< File/Dir already exist 
   case errorStorageExist // = 6
 
   ///*< File/Dir does not exist 
@@ -64,7 +64,7 @@ enum PB_CommandStatus: SwiftProtobuf.Enum, Swift.CaseIterable {
   ///*< Internal error 
   case errorStorageInternal // = 11
 
-  ///*< Functon not implemented 
+  ///*< Function is not implemented 
   case errorStorageNotImplemented // = 12
 
   ///*< File/Dir already opened 
@@ -517,6 +517,14 @@ struct PB_Main: Sendable {
     set {content = .storageBackupRestoreRequest(newValue)}
   }
 
+  var storageTarExtractRequest: PBStorage_TarExtractRequest {
+    get {
+      if case .storageTarExtractRequest(let v)? = content {return v}
+      return PBStorage_TarExtractRequest()
+    }
+    set {content = .storageTarExtractRequest(newValue)}
+  }
+
   var appStartRequest: PBApp_StartRequest {
     get {
       if case .appStartRequest(let v)? = content {return v}
@@ -571,6 +579,14 @@ struct PB_Main: Sendable {
       return PBApp_AppButtonReleaseRequest()
     }
     set {content = .appButtonReleaseRequest(newValue)}
+  }
+
+  var appButtonPressReleaseRequest: PBApp_AppButtonPressReleaseRequest {
+    get {
+      if case .appButtonPressReleaseRequest(let v)? = content {return v}
+      return PBApp_AppButtonPressReleaseRequest()
+    }
+    set {content = .appButtonPressReleaseRequest(newValue)}
   }
 
   var appGetErrorRequest: PBApp_GetErrorRequest {
@@ -701,6 +717,30 @@ struct PB_Main: Sendable {
     set {content = .gpioWritePin(newValue)}
   }
 
+  var gpioGetOtgMode: PBGpio_GetOtgMode {
+    get {
+      if case .gpioGetOtgMode(let v)? = content {return v}
+      return PBGpio_GetOtgMode()
+    }
+    set {content = .gpioGetOtgMode(newValue)}
+  }
+
+  var gpioGetOtgModeResponse: PBGpio_GetOtgModeResponse {
+    get {
+      if case .gpioGetOtgModeResponse(let v)? = content {return v}
+      return PBGpio_GetOtgModeResponse()
+    }
+    set {content = .gpioGetOtgModeResponse(newValue)}
+  }
+
+  var gpioSetOtgMode: PBGpio_SetOtgMode {
+    get {
+      if case .gpioSetOtgMode(let v)? = content {return v}
+      return PBGpio_SetOtgMode()
+    }
+    set {content = .gpioSetOtgMode(newValue)}
+  }
+
   var appStateResponse: PBApp_AppStateResponse {
     get {
       if case .appStateResponse(let v)? = content {return v}
@@ -804,6 +844,7 @@ struct PB_Main: Sendable {
     case storageRenameRequest(PBStorage_RenameRequest)
     case storageBackupCreateRequest(PBStorage_BackupCreateRequest)
     case storageBackupRestoreRequest(PBStorage_BackupRestoreRequest)
+    case storageTarExtractRequest(PBStorage_TarExtractRequest)
     case appStartRequest(PBApp_StartRequest)
     case appLockStatusRequest(PBApp_LockStatusRequest)
     case appLockStatusResponse(PBApp_LockStatusResponse)
@@ -811,6 +852,7 @@ struct PB_Main: Sendable {
     case appLoadFileRequest(PBApp_AppLoadFileRequest)
     case appButtonPressRequest(PBApp_AppButtonPressRequest)
     case appButtonReleaseRequest(PBApp_AppButtonReleaseRequest)
+    case appButtonPressReleaseRequest(PBApp_AppButtonPressReleaseRequest)
     case appGetErrorRequest(PBApp_GetErrorRequest)
     case appGetErrorResponse(PBApp_GetErrorResponse)
     case appDataExchangeRequest(PBApp_DataExchangeRequest)
@@ -827,6 +869,9 @@ struct PB_Main: Sendable {
     case gpioReadPin(PBGpio_ReadPin)
     case gpioReadPinResponse(PBGpio_ReadPinResponse)
     case gpioWritePin(PBGpio_WritePin)
+    case gpioGetOtgMode(PBGpio_GetOtgMode)
+    case gpioGetOtgModeResponse(PBGpio_GetOtgModeResponse)
+    case gpioSetOtgMode(PBGpio_SetOtgMode)
     case appStateResponse(PBApp_AppStateResponse)
     case propertyGetRequest(PBProperty_GetRequest)
     case propertyGetResponse(PBProperty_GetResponse)
@@ -987,6 +1032,7 @@ extension PB_Main: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBa
     30: .standard(proto: "storage_rename_request"),
     42: .standard(proto: "storage_backup_create_request"),
     43: .standard(proto: "storage_backup_restore_request"),
+    71: .standard(proto: "storage_tar_extract_request"),
     16: .standard(proto: "app_start_request"),
     17: .standard(proto: "app_lock_status_request"),
     18: .standard(proto: "app_lock_status_response"),
@@ -994,6 +1040,7 @@ extension PB_Main: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBa
     48: .standard(proto: "app_load_file_request"),
     49: .standard(proto: "app_button_press_request"),
     50: .standard(proto: "app_button_release_request"),
+    75: .standard(proto: "app_button_press_release_request"),
     63: .standard(proto: "app_get_error_request"),
     64: .standard(proto: "app_get_error_response"),
     65: .standard(proto: "app_data_exchange_request"),
@@ -1010,6 +1057,9 @@ extension PB_Main: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBa
     55: .standard(proto: "gpio_read_pin"),
     56: .standard(proto: "gpio_read_pin_response"),
     57: .standard(proto: "gpio_write_pin"),
+    72: .standard(proto: "gpio_get_otg_mode"),
+    73: .standard(proto: "gpio_get_otg_mode_response"),
+    74: .standard(proto: "gpio_set_otg_mode"),
     58: .standard(proto: "app_state_response"),
     61: .standard(proto: "property_get_request"),
     62: .standard(proto: "property_get_response"),
@@ -1900,6 +1950,71 @@ extension PB_Main: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBa
           self.content = .desktopStatus(v)
         }
       }()
+      case 71: try {
+        var v: PBStorage_TarExtractRequest?
+        var hadOneofValue = false
+        if let current = self.content {
+          hadOneofValue = true
+          if case .storageTarExtractRequest(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.content = .storageTarExtractRequest(v)
+        }
+      }()
+      case 72: try {
+        var v: PBGpio_GetOtgMode?
+        var hadOneofValue = false
+        if let current = self.content {
+          hadOneofValue = true
+          if case .gpioGetOtgMode(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.content = .gpioGetOtgMode(v)
+        }
+      }()
+      case 73: try {
+        var v: PBGpio_GetOtgModeResponse?
+        var hadOneofValue = false
+        if let current = self.content {
+          hadOneofValue = true
+          if case .gpioGetOtgModeResponse(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.content = .gpioGetOtgModeResponse(v)
+        }
+      }()
+      case 74: try {
+        var v: PBGpio_SetOtgMode?
+        var hadOneofValue = false
+        if let current = self.content {
+          hadOneofValue = true
+          if case .gpioSetOtgMode(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.content = .gpioSetOtgMode(v)
+        }
+      }()
+      case 75: try {
+        var v: PBApp_AppButtonPressReleaseRequest?
+        var hadOneofValue = false
+        if let current = self.content {
+          hadOneofValue = true
+          if case .appButtonPressReleaseRequest(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.content = .appButtonPressReleaseRequest(v)
+        }
+      }()
       default: break
       }
     }
@@ -2187,6 +2302,26 @@ extension PB_Main: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBa
     case .desktopStatus?: try {
       guard case .desktopStatus(let v)? = self.content else { preconditionFailure() }
       try visitor.visitSingularMessageField(value: v, fieldNumber: 70)
+    }()
+    case .storageTarExtractRequest?: try {
+      guard case .storageTarExtractRequest(let v)? = self.content else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 71)
+    }()
+    case .gpioGetOtgMode?: try {
+      guard case .gpioGetOtgMode(let v)? = self.content else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 72)
+    }()
+    case .gpioGetOtgModeResponse?: try {
+      guard case .gpioGetOtgModeResponse(let v)? = self.content else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 73)
+    }()
+    case .gpioSetOtgMode?: try {
+      guard case .gpioSetOtgMode(let v)? = self.content else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 74)
+    }()
+    case .appButtonPressReleaseRequest?: try {
+      guard case .appButtonPressReleaseRequest(let v)? = self.content else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 75)
     }()
     case nil: break
     }

@@ -74,19 +74,19 @@ enum PBGui_InputKey: SwiftProtobuf.Enum, Swift.CaseIterable {
 enum PBGui_InputType: SwiftProtobuf.Enum, Swift.CaseIterable {
   typealias RawValue = Int
 
-  ///*< Press event, emitted after debounce 
+  ///*< Press event, emitted after de-bounce 
   case press // = 0
 
-  ///*< Release event, emitted after debounce 
+  ///*< Release event, emitted after de-bounce 
   case release // = 1
 
   ///*< Short event, emitted after InputTypeRelease done withing INPUT_LONG_PRESS interval 
   case short // = 2
 
-  ///*< Long event, emmited after INPUT_LONG_PRESS interval, asynchronouse to InputTypeRelease  
+  ///*< Long event, emitted after INPUT_LONG_PRESS interval, asynchronous to InputTypeRelease  
   case long // = 3
 
-  ///*< Repeat event, emmited with INPUT_REPEATE_PRESS period after InputTypeLong event 
+  ///*< Repeat event, emitted with INPUT_REPEATE_PRESS period after InputTypeLong event 
   case `repeat` // = 4
   case UNRECOGNIZED(Int)
 
@@ -133,13 +133,13 @@ enum PBGui_ScreenOrientation: SwiftProtobuf.Enum, Swift.CaseIterable {
   ///*< Horizontal 
   case horizontal // = 0
 
-  ///*< Horizontal flipped (180)
+  ///*< Horizontal flipped (180) 
   case horizontalFlip // = 1
 
-  ///*< Vertical (90)
+  ///*< Vertical (90) 
   case vertical // = 2
 
-  ///*< Vertical flipped 
+  ///*< Vertical flipped (270) 
   case verticalFlip // = 3
   case UNRECOGNIZED(Int)
 
@@ -230,7 +230,7 @@ struct PBGui_StartVirtualDisplayRequest: Sendable {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  /// optional
+  ///*< Optional: screen frame to show 
   var firstFrame: PBGui_ScreenFrame {
     get {return _firstFrame ?? PBGui_ScreenFrame()}
     set {_firstFrame = newValue}
@@ -239,6 +239,9 @@ struct PBGui_StartVirtualDisplayRequest: Sendable {
   var hasFirstFrame: Bool {return self._firstFrame != nil}
   /// Clears the value of `firstFrame`. Subsequent reads from it will return its default value.
   mutating func clearFirstFrame() {self._firstFrame = nil}
+
+  ///*< Optional: send flipper input 
+  var sendInput: Bool = false
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -409,6 +412,7 @@ extension PBGui_StartVirtualDisplayRequest: SwiftProtobuf.Message, SwiftProtobuf
   static let protoMessageName: String = _protobuf_package + ".StartVirtualDisplayRequest"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "first_frame"),
+    2: .standard(proto: "send_input"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -418,6 +422,7 @@ extension PBGui_StartVirtualDisplayRequest: SwiftProtobuf.Message, SwiftProtobuf
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularMessageField(value: &self._firstFrame) }()
+      case 2: try { try decoder.decodeSingularBoolField(value: &self.sendInput) }()
       default: break
       }
     }
@@ -431,11 +436,15 @@ extension PBGui_StartVirtualDisplayRequest: SwiftProtobuf.Message, SwiftProtobuf
     try { if let v = self._firstFrame {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
     } }()
+    if self.sendInput != false {
+      try visitor.visitSingularBoolField(value: self.sendInput, fieldNumber: 2)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: PBGui_StartVirtualDisplayRequest, rhs: PBGui_StartVirtualDisplayRequest) -> Bool {
     if lhs._firstFrame != rhs._firstFrame {return false}
+    if lhs.sendInput != rhs.sendInput {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
