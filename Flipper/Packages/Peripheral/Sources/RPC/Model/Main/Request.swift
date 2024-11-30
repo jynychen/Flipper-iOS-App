@@ -38,6 +38,7 @@ public enum Request {
         case lockStatus
         case loadFile(Path)
         case pressButton(String, Int)
+        case pressReleaseButton(String, Int)
         case releaseButton
         case exit
     }
@@ -217,6 +218,13 @@ extension Request.Application {
         case let .pressButton(args, index):
             return .with {
                 $0.appButtonPressRequest = .with {
+                    $0.args = args
+                    $0.index = .init(index)
+                }
+            }
+        case let .pressReleaseButton(args, index):
+            return .with {
+                $0.appButtonPressReleaseRequest = .with {
                     $0.args = args
                     $0.index = .init(index)
                 }
@@ -406,6 +414,8 @@ extension Request.Application: CustomStringConvertible {
             return "loadFile(\(path))"
         case let .pressButton(args, index):
             return "pressButton(\(args) \(index)"
+        case let .pressReleaseButton(args, index):
+            return "pressReleaseButton(\(args) \(index)"
         case .releaseButton:
             return "releaseButton"
         case .exit:
