@@ -6,6 +6,7 @@ extension InfraredEmulateView {
         let isEmulating: Bool
         let emulateDuration: Int
 
+        let onTap: () -> Void
         let onPressed: () -> Void
         let onReleased: () -> Void
 
@@ -67,8 +68,7 @@ extension InfraredEmulateView {
                     .opacity(isEmulating ? 1 : 0)
             )
             .onTapGesture {
-                startEmulate()
-                stopEmulate()
+                onTap()
             }
             .gesture(
                 LongPressGesture()

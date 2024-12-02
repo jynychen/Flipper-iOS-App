@@ -24,6 +24,11 @@ public class Emulate: ObservableObject {
         case byIndex(Int)
     }
 
+    public enum EmulateType {
+        case continuous
+        case single
+    }
+
     var item: ArchiveItem?
 
     private var stop = false
@@ -62,7 +67,8 @@ public class Emulate: ObservableObject {
 
     public func startEmulate(
         _ item: ArchiveItem,
-        config: EmulateConfig = .none
+        config: EmulateConfig = .none,
+        type: EmulateType = .continuous
     ) {
         guard self.item == nil else {
             return
@@ -72,7 +78,7 @@ public class Emulate: ObservableObject {
             do {
                 try await startApp(item.kind.application)
                 try await loadFile(item.path)
-                try await startLoaded(item, config: config)
+                try await startLoaded(item, config: config, type: type)
                 recordEmulate()
             } catch {
                 logger.error("emilating key: \(error)")
@@ -144,7 +150,8 @@ public class Emulate: ObservableObject {
 
     private func startLoaded(
         _ item: ArchiveItem,
-        config: EmulateConfig
+        config: EmulateConfig,
+        type: EmulateType
     ) async throws {
         guard state == .loaded else {
             return
@@ -163,7 +170,12 @@ public class Emulate: ObservableObject {
             case .byIndex(let index) = config
         {
             do {
-                try await application.buttonPress(index: index)
+                switch type {
+                case .continuous:
+                    try await application.buttonPress(index: index)
+                case .single:
+                    try await application.buttonPressRelease(index: index)
+                }
             } catch let error as Error where error == .application(.cmdError) {
                 state = .restricted
                 throw error

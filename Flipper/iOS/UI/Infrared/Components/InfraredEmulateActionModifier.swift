@@ -3,32 +3,46 @@ import SwiftUI
 
 private struct EmulateActionModifier: ViewModifier {
     @EnvironmentObject private var emulate: Emulate
+    @EnvironmentObject private var device: Device
+
     @Environment(\.emulateAction) private var action
 
     @State private var isPressed = false
     let keyID: InfraredKeyID
 
-    private func onStart() {
-        action(keyID)
+    func onTap() {
+        guard let flipper = device.flipper else { return }
+
+        if flipper.hasSingleEmulateSupport {
+            action(keyID, Emulate.EmulateType.single)
+        } else {
+            onPress()
+            onRelease()
+        }
     }
 
-    private func onStop() {
+    func onPress() {
+        action(keyID, Emulate.EmulateType.continuous)
+    }
+
+    func onRelease() {
         emulate.stopEmulate()
     }
 
     func body(content: Content) -> some View {
         content
-            .simultaneousGesture(
-                DragGesture(minimumDistance: 0)
-                    .onChanged { _ in
-                        guard !isPressed else { return }
-                        isPressed = true
-                        onStart()
-                    }
+            .onTapGesture {
+                onTap()
+            }
+            .gesture(
+                LongPressGesture()
                     .onEnded { _ in
-                        isPressed = false
-                        onStop()
-                    }
+                        onPress()
+                    }.sequenced(before: DragGesture(minimumDistance: 0)
+                        .onEnded { _ in
+                            onRelease()
+                        }
+                    )
             )
     }
 }

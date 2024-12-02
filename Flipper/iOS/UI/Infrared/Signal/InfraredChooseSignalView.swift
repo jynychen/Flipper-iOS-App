@@ -6,7 +6,7 @@ extension InfraredView {
         let button: InfraredButtonData
         let state: InfraredLayoutState
 
-        let onStartEmulate: (InfraredKeyID) -> Void
+        let onStartEmulate: (InfraredKeyID, Emulate.EmulateType) -> Void
         let onSkip: () -> Void
 
         var body: some View {

@@ -46,7 +46,7 @@ extension InfraredView {
                     InfraredChooseSignalView(
                         button: .unknown,
                         state: .syncing,
-                        onStartEmulate: { _ in },
+                        onStartEmulate: { _, _ in },
                         onSkip: {}
                     )
                 case .error(let error):
@@ -170,10 +170,18 @@ extension InfraredView {
             } catch {}
         }
 
-        private func onStartEmulate(_ keyID: InfraredKeyID) {
+        private func onStartEmulate(
+            _ keyID: InfraredKeyID,
+            type: Emulate.EmulateType
+        ) {
             guard let signal = currentSignal else { return }
             viewState = .display(signal, .emulating)
-            emulate.startEmulate(.tempIfr, config: .byIndex(0))
+
+            emulate.startEmulate(
+                .tempIfr,
+                config: .byIndex(0),
+                type: type
+            )
         }
 
         private func processConfirmSignal(type: InfraredChooseSignalType) {

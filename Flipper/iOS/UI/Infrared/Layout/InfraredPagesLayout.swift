@@ -190,14 +190,21 @@ extension InfraredView {
             } catch {}
         }
 
-        private func onStartEmulate(_ keyID: InfraredKeyID) {
+        private func onStartEmulate(
+            _ keyID: InfraredKeyID,
+            type: Emulate.EmulateType
+        ) {
             guard
                 let layout, let archiveItem,
                 let index = archiveItem.infraredSignals.firstIndex(keyId: keyID)
             else { return }
 
             viewState = .display(layout, .emulating)
-            emulate.startEmulate(.tempIfr, config: .byIndex(index))
+            emulate.startEmulate(
+                .tempIfr,
+                config: .byIndex(index),
+                type: type
+            )
         }
 
         private func retry() {

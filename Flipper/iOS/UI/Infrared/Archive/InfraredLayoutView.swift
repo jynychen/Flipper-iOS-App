@@ -108,11 +108,14 @@ struct InfraredLayoutView: View {
         }
     }
 
-    private func onStartEmulate(_ keyID: InfraredKeyID) {
+    private func onStartEmulate(
+        _ keyID: InfraredKeyID,
+        type: Emulate.EmulateType
+    ) {
         guard
             let index = current.infraredSignals.firstIndex(keyId: keyID)
         else { return }
 
-        emulate.startEmulate(current, config: .byIndex(index))
+        emulate.startEmulate(current, config: .byIndex(index), type: type)
     }
 }

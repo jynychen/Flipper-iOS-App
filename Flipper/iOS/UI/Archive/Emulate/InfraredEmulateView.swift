@@ -116,6 +116,7 @@ struct InfraredEmulateView: View {
             text: names[index],
             isEmulating: currentEmulateIndex == index,
             emulateDuration: item.duration,
+            onTap: { processTapEmulate(index: index) },
             onPressed: { processStartEmulate(index: index) },
             onReleased: stopEmulate
         )
@@ -154,13 +155,32 @@ struct InfraredEmulateView: View {
         if currentEmulateIndex == index {
             forceStopEmulate()
         } else {
-            startEmulate(index: index)
+            startEmulate(index: index, type: .continuous)
         }
     }
 
-    func startEmulate(index: Int) {
+    func processTapEmulate(index: Int) {
+        if currentEmulateIndex == index {
+            forceStopEmulate()
+        } else {
+            guard let flipper = device.flipper else { return }
+
+            if flipper.hasSingleEmulateSupport {
+                startEmulate(index: index, type: .single)
+            } else {
+                startEmulate(index: index, type: .continuous)
+                stopEmulate()
+            }
+        }
+    }
+
+    func startEmulate(index: Int, type: Emulate.EmulateType) {
         currentEmulateIndex = index
-        emulate.startEmulate(item, config: .byIndex(index))
+        emulate.startEmulate(
+            item,
+            config: .byIndex(index),
+            type: type
+        )
     }
 
     func stopEmulate() {
@@ -179,6 +199,16 @@ extension Flipper {
         guard
             let protobuf = information?.protobufRevision,
             protobuf >= .v0_21
+        else {
+            return false
+        }
+        return true
+    }
+
+    var hasSingleEmulateSupport: Bool {
+        guard
+            let protobuf = information?.protobufRevision,
+            protobuf >= .v0_25
         else {
             return false
         }
