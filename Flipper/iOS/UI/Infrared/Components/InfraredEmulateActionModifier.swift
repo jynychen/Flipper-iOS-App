@@ -2,27 +2,43 @@ import Core
 import SwiftUI
 
 private struct EmulateActionModifier: ViewModifier {
+    @Environment(\.emulateItem) private var item: ArchiveItem?
+    @Environment(\.layoutScaleFactor) private var layoutScale: Double
+
     @EnvironmentObject private var emulate: Emulate
     @EnvironmentObject private var device: Device
-
-    @Environment(\.emulateAction) private var action
 
     @State private var isPressed = false
     let keyID: InfraredKeyID
 
+    private var index: Int? {
+        guard let item = item else { return nil }
+
+        return item.properties.isEmpty // Brute force signals without content
+            ? 0
+            : item.infraredSignals.firstIndex(keyId: keyID)
+    }
+
     func onTap() {
-        guard let flipper = device.flipper else { return }
+        guard
+            let index = index, let item = item,
+            let flipper = device.flipper
+        else { return }
 
         if flipper.hasSingleEmulateSupport {
-            action(keyID, Emulate.EmulateType.single)
+            emulate.startEmulate(item, .infraredSingle(index: index))
         } else {
-            onPress()
-            onRelease()
+            emulate.startEmulate(item, .infrared(index: index))
+            emulate.stopEmulate()
         }
     }
 
     func onPress() {
-        action(keyID, Emulate.EmulateType.continuous)
+        guard
+            let index = index, let item = item
+        else { return }
+
+        emulate.startEmulate(item, .infrared(index: index))
     }
 
     func onRelease() {
@@ -31,11 +47,13 @@ private struct EmulateActionModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
+            .padding(16 * layoutScale) // Padding for more tapping zone
+            .contentShape(Rectangle())
             .onTapGesture {
                 onTap()
             }
             .gesture(
-                LongPressGesture()
+                LongPressGesture(minimumDuration: 0.3)
                     .onEnded { _ in
                         onPress()
                     }.sequenced(before: DragGesture(minimumDistance: 0)

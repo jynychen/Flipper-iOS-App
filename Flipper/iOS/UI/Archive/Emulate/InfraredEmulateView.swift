@@ -155,7 +155,8 @@ struct InfraredEmulateView: View {
         if currentEmulateIndex == index {
             forceStopEmulate()
         } else {
-            startEmulate(index: index, type: .continuous)
+            currentEmulateIndex = index
+            emulate.startEmulate(item, .infrared(index: index))
         }
     }
 
@@ -164,23 +165,15 @@ struct InfraredEmulateView: View {
             forceStopEmulate()
         } else {
             guard let flipper = device.flipper else { return }
+            currentEmulateIndex = index
 
             if flipper.hasSingleEmulateSupport {
-                startEmulate(index: index, type: .single)
+                emulate.startEmulate(item, .infraredSingle(index: index))
             } else {
-                startEmulate(index: index, type: .continuous)
+                emulate.startEmulate(item, .infrared(index: index))
                 stopEmulate()
             }
         }
-    }
-
-    func startEmulate(index: Int, type: Emulate.EmulateType) {
-        currentEmulateIndex = index
-        emulate.startEmulate(
-            item,
-            config: .byIndex(index),
-            type: type
-        )
     }
 
     func stopEmulate() {

@@ -71,7 +71,7 @@ extension InfraredEmulateView {
                 onTap()
             }
             .gesture(
-                LongPressGesture()
+                LongPressGesture(minimumDuration: 0.3)
                     .onEnded { _ in
                         startEmulate()
                     }.sequenced(before: DragGesture(minimumDistance: 0)

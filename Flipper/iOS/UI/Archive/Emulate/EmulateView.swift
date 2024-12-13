@@ -132,7 +132,7 @@ struct EmulateView: View {
     func startEmulate() {
         guard !isEmulating else { return }
         isEmulating = true
-        emulate.startEmulate(item)
+        emulate.startEmulate(item, item.defaultConfig)
         showBubbleIfNeeded()
     }
 

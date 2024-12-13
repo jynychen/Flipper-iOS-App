@@ -51,7 +51,7 @@ struct EmulateIntent: LiveActivityIntent {
 
     func startEmulate(_ item: ArchiveItem) async throws {
         emulating = item.path.string
-        await Dependencies.shared.emulate.startEmulate(item)
+        await Dependencies.shared.emulate.startEmulate(item, item.defaultConfig)
     }
 
     func stopEmulate() async throws {
