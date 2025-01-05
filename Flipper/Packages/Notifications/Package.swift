@@ -19,8 +19,8 @@ let package = Package(
             url: "https://github.com/apple/swift-log.git",
             from: "1.5.4"),
         .package(
-            url: "https://github.com/tonyfreeman/firebase-ios-sdk",
-            branch: "master")
+            url: "https://github.com/firebase/firebase-ios-sdk",
+            from: "11.6.0")
     ],
     targets: [
         .target(
