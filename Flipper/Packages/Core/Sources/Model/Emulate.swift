@@ -19,9 +19,11 @@ public class Emulate: ObservableObject {
         case restricted
     }
 
-    public enum EmulateConfig {
-        case none
-        case byIndex(Int)
+    public enum Config {
+        case `default`
+        case subGhz
+        case infrared(index: Int)
+        case infraredSingle(index: Int)
     }
 
     var item: ArchiveItem?
@@ -29,7 +31,6 @@ public class Emulate: ObservableObject {
     private var stop = false
     private var forceStop = false
     private var emulateTask: Task<Void, Swift.Error>?
-    private var emulateStarted: Date = .now
 
     private var application: ApplicationAPI
 
@@ -62,7 +63,7 @@ public class Emulate: ObservableObject {
 
     public func startEmulate(
         _ item: ArchiveItem,
-        config: EmulateConfig = .none
+        _ config: Config
     ) {
         guard self.item == nil else {
             return
@@ -144,34 +145,30 @@ public class Emulate: ObservableObject {
 
     private func startLoaded(
         _ item: ArchiveItem,
-        config: EmulateConfig
+        config: Config
     ) async throws {
         guard state == .loaded else {
             return
         }
-        if item.kind == .subghz {
+
+        switch config {
+        case .infrared(let index):
+            try await application.buttonPress(index: index)
+            try await waitForMinimumDuration(for: item)
+        case .infraredSingle(let index):
+            try await application.buttonPressRelease(index: index)
+        case .subGhz:
             do {
                 try await application.buttonPress()
+                try await waitForMinimumDuration(for: item)
             } catch let error as Error where error == .application(.cmdError) {
                 state = .restricted
                 throw error
             }
-            emulateStarted = .now
+        case .default: ()
         }
-        if
-            item.kind == .infrared,
-            case .byIndex(let index) = config
-        {
-            do {
-                try await application.buttonPress(index: index)
-            } catch let error as Error where error == .application(.cmdError) {
-                state = .restricted
-                throw error
-            }
-            emulateStarted = .now
-        }
+
         state = .emulating
-        try await waitForMinimumDuration(for: item)
     }
 
     private func waitForMinimumDuration(for item: ArchiveItem) async throws {
@@ -216,9 +213,11 @@ public class Emulate: ObservableObject {
 
 extension ArchiveItem {
     public var duration: Int {
-        isRaw
-            ? emulateRawMinimum
-            : emulateMinimum
+        switch kind {
+        case .subghz: isRaw ? emulateRawMinimum : emulateMinimum
+        case .infrared: emulateMinimum
+        default: 0
+        }
     }
 
     // Minimum for RAW SubGHz in ms
@@ -236,26 +235,13 @@ extension ArchiveItem {
     var emulateMinimum: Int {
         500
     }
-}
 
-extension Emulate {
-    // Emulated since button pressed (ms)
-    var emulateDuration: Int {
-        Date().timeIntervalSince(emulateStarted).ms
-    }
-
-    func emulateDurationRemains(for item: ArchiveItem) -> Int {
-        max(0, item.emulateMinimum - emulateDuration)
-    }
-
-    func emulateRawDurationRemains(for item: ArchiveItem) -> Int {
-        max(0, item.emulateRawMinimum - emulateDuration)
-    }
-}
-
-fileprivate extension Double {
-    var ms: Int {
-        Int(self * 1000)
+    public var defaultConfig: Emulate.Config {
+        switch kind {
+        case .subghz: .subGhz
+        case .infrared: .infrared(index: 0)
+        default: .default
+        }
     }
 }
 

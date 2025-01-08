@@ -41,7 +41,7 @@ struct SendArchivedItem: AppIntent {
             )
         }
 
-        await dependencies.emulate.startEmulate(item)
+        await dependencies.emulate.startEmulate(item, item.defaultConfig)
         try await Task.sleep(milliseconds: item.duration)
 
         guard await dependencies.emulate.state != .locked else {

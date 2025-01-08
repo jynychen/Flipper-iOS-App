@@ -39,6 +39,10 @@ class FlipperApplicationAPI: ApplicationAPI {
         try await rpc.appButtonPress(args: args, index: index)
     }
 
+    func buttonPressRelease(args: String, index: Int) async throws {
+        try await rpc.appButtonPressRelease(args: args, index: index)
+    }
+
     func buttonRelease() async throws {
         try await rpc.appButtonRelease()
     }

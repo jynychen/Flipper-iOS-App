@@ -6,7 +6,6 @@ extension InfraredView {
         let button: InfraredButtonData
         let state: InfraredLayoutState
 
-        let onStartEmulate: (InfraredKeyID) -> Void
         let onSkip: () -> Void
 
         var body: some View {
@@ -16,7 +15,7 @@ extension InfraredView {
                 InfraredButtonTypeView(data: button)
                     .frame(width: 60, height: 60)
                     .environment(\.layoutState, state)
-                    .environment(\.emulateAction, onStartEmulate)
+                    .environment(\.emulateItem, .tempIfr)
                     .padding(.top, 12)
 
                 Spacer()

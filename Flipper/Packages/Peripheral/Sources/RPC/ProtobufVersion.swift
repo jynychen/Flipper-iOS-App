@@ -76,6 +76,18 @@ public struct ProtobufVersion {
     // Add index field to AppButtonPressRequest message
     public static var v0_21: ProtobufVersion = .init(major: 0, minor: 21)
 
+    // Support reversere input in StartVirtualDisplayRequest
+    public static var v0_22: ProtobufVersion = .init(major: 0, minor: 22)
+
+    // Request to unpack a tar archive to a given directory
+    public static var v0_23: ProtobufVersion = .init(major: 0, minor: 23)
+
+    // Methods to control 5V on GPIO
+    public static var v0_24: ProtobufVersion = .init(major: 0, minor: 24)
+
+    // AppButtonPressRelease for single button press
+    public static var v0_25: ProtobufVersion = .init(major: 0, minor: 25)
+
     // Future release
     public static var v1_0: ProtobufVersion = .init(major: 1, minor: 0)
 }

@@ -332,6 +332,20 @@ struct PBStorage_BackupRestoreRequest: Sendable {
   init() {}
 }
 
+struct PBStorage_TarExtractRequest: Sendable {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var tarPath: String = String()
+
+  var outPath: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "PB_Storage"
@@ -1018,6 +1032,44 @@ extension PBStorage_BackupRestoreRequest: SwiftProtobuf.Message, SwiftProtobuf._
 
   static func ==(lhs: PBStorage_BackupRestoreRequest, rhs: PBStorage_BackupRestoreRequest) -> Bool {
     if lhs.archivePath != rhs.archivePath {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension PBStorage_TarExtractRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".TarExtractRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "tar_path"),
+    2: .standard(proto: "out_path"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.tarPath) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.outPath) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.tarPath.isEmpty {
+      try visitor.visitSingularStringField(value: self.tarPath, fieldNumber: 1)
+    }
+    if !self.outPath.isEmpty {
+      try visitor.visitSingularStringField(value: self.outPath, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: PBStorage_TarExtractRequest, rhs: PBStorage_TarExtractRequest) -> Bool {
+    if lhs.tarPath != rhs.tarPath {return false}
+    if lhs.outPath != rhs.outPath {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

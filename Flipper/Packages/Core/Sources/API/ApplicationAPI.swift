@@ -8,6 +8,7 @@ public protocol ApplicationAPI {
     func start(_ name: String, args: String) async throws
     func loadFile(_ path: Path) async throws
     func buttonPress(args: String, index: Int) async throws
+    func buttonPressRelease(args: String, index: Int) async throws
     func buttonRelease() async throws
     func exit() async throws
 }
@@ -15,5 +16,9 @@ public protocol ApplicationAPI {
 extension ApplicationAPI {
     func buttonPress(index: Int = 0) async throws {
         try await buttonPress(args: "", index: index)
+    }
+
+    func buttonPressRelease(index: Int = 0) async throws {
+        try await buttonPressRelease(args: "", index: index)
     }
 }

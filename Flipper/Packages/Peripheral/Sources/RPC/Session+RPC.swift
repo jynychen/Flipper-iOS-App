@@ -303,6 +303,15 @@ extension Session {
         }
     }
 
+    public func appButtonPressRelease(args: String, index: Int) async throws {
+        let response = try await self
+            .send(.application(.pressReleaseButton(args, index)))
+            .response
+        guard case .ok = response else {
+            throw Error.unexpectedResponse(response)
+        }
+    }
+
     public func appButtonRelease() async throws {
         let response = try await self
             .send(.application(.releaseButton))

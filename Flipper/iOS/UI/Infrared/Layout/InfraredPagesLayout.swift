@@ -42,13 +42,9 @@ extension InfraredView {
         private var archiveItem: ArchiveItem? {
             guard let content else { return nil }
 
-            return .init(
-                name: .init(keyName),
-                kind: .infrared,
-                properties: content.properties,
-                shadowCopy: [],
-                layout: layout?.data
-            )
+            var item = ArchiveItem.tempIfr
+            item.properties = content.properties
+            return item
         }
 
         let file: InfraredFile
@@ -79,7 +75,7 @@ extension InfraredView {
                 case .display(let layout, let state):
                     InfraredLayoutPagesView(layout: layout)
                         .environment(\.layoutState, state)
-                        .environment(\.emulateAction, onStartEmulate)
+                        .environment(\.emulateItem, archiveItem)
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -106,8 +102,7 @@ extension InfraredView {
                 TrailingToolbarItems {
                     HStack {
                         SaveButton {
-                            guard let item = archiveItem else { return }
-                            path.append(Destination.save(file, item))
+                            save()
                         }
                         .disabled(!canSaveLayout)
 
@@ -151,7 +146,9 @@ extension InfraredView {
             }
             .onChange(of: emulate.state) { state in
                 guard let layout else { return }
-
+                if state == .staring {
+                    viewState = .display(layout, .emulating)
+                }
                 if state == .closed {
                     viewState = .display(layout, .default)
                 }
@@ -190,21 +187,24 @@ extension InfraredView {
             } catch {}
         }
 
-        private func onStartEmulate(_ keyID: InfraredKeyID) {
-            guard
-                let layout, let archiveItem,
-                let index = archiveItem.infraredSignals.firstIndex(keyId: keyID)
-            else { return }
-
-            viewState = .display(layout, .emulating)
-            emulate.startEmulate(.tempIfr, config: .byIndex(index))
-        }
-
         private func retry() {
             Task {
                 notifications.infraredLibrary.showRemoteFound = false
                 await processLoadFile()
             }
+        }
+
+        private func save() {
+            guard let content else { return }
+
+            let item: ArchiveItem = .init(
+                name: .init(keyName),
+                kind: .infrared,
+                properties: content.properties,
+                shadowCopy: [],
+                layout: layout?.data
+            )
+            path.append(Destination.save(file, item))
         }
     }
 }

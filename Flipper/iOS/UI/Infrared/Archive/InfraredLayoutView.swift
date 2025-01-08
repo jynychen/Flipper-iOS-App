@@ -44,7 +44,7 @@ struct InfraredLayoutView: View {
         VStack(spacing: 0) {
             InfraredLayoutPagesView(layout: layout)
                 .environment(\.layoutState, layoutState)
-                .environment(\.emulateAction, onStartEmulate)
+                .environment(\.emulateItem, current)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.background)
@@ -106,13 +106,5 @@ struct InfraredLayoutView: View {
                 feedback(style: .soft)
             }
         }
-    }
-
-    private func onStartEmulate(_ keyID: InfraredKeyID) {
-        guard
-            let index = current.infraredSignals.firstIndex(keyId: keyID)
-        else { return }
-
-        emulate.startEmulate(current, config: .byIndex(index))
     }
 }

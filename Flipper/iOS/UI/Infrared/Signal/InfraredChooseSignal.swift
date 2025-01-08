@@ -46,9 +46,9 @@ extension InfraredView {
                     InfraredChooseSignalView(
                         button: .unknown,
                         state: .syncing,
-                        onStartEmulate: { _ in },
                         onSkip: {}
                     )
+                    .environment(\.emulateItem, .tempIfr)
                 case .error(let error):
                     InfraredNetworkError(error: error, action: retry)
                 case .flipperNotConnected:
@@ -57,7 +57,6 @@ extension InfraredView {
                     InfraredChooseSignalView(
                         button: signal.button,
                         state: state,
-                        onStartEmulate: onStartEmulate,
                         onSkip: { processConfirmSignal(type: .skipped) }
                     )
                 }
@@ -126,7 +125,9 @@ extension InfraredView {
             }
             .onChange(of: emulate.state) { state in
                 guard let signal = currentSignal else { return }
-
+                if state == .staring {
+                    viewState = .display(signal, .emulating)
+                }
                 if state == .closed {
                     viewState = .display(signal, .default)
                     showConfirmDialog = true
@@ -168,12 +169,6 @@ extension InfraredView {
             } catch let error as InfraredModel.Error.Network {
                 viewState = .error(error)
             } catch {}
-        }
-
-        private func onStartEmulate(_ keyID: InfraredKeyID) {
-            guard let signal = currentSignal else { return }
-            viewState = .display(signal, .emulating)
-            emulate.startEmulate(.tempIfr, config: .byIndex(0))
         }
 
         private func processConfirmSignal(type: InfraredChooseSignalType) {
