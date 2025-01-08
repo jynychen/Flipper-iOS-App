@@ -18,8 +18,8 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            url: "https://github.com/apple/swift-syntax.git",
-            from: "509.0.0")
+            url: "https://github.com/swiftlang/swift-syntax.git",
+            from: "600.0.1")
     ],
     targets: [
         .macro(

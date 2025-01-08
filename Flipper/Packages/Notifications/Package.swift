@@ -20,7 +20,7 @@ let package = Package(
             from: "1.5.4"),
         .package(
             url: "https://github.com/tonyfreeman/firebase-ios-sdk",
-            branch: "master")
+            from: "11.6.0-messaging")
     ],
     targets: [
         .target(
