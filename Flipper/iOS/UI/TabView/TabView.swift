@@ -52,7 +52,10 @@ struct TabView: View {
     }
 
     var body: some View {
-        Group {
+        VStack {
+            Divider()
+                .background(.surfaceBottomBarSeparator)
+
             HStack(alignment: .top) {
                 TabViewItem(
                     image: deviceImage,
@@ -101,7 +104,7 @@ struct TabView: View {
             }
             .padding(3)
         }
-        .background(systemBackground)
+        .background(.surfaceBottomBarBody)
     }
 
     // MARK: Analytics
